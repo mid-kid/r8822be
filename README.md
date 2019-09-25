@@ -7,7 +7,7 @@ However, I tend to create a wireless hotspot from my laptop, since I usually con
 
 The new driver doesn't support creating access points over 5GHz anymore, but what is worse, is how it keeps kernel panicing whenever I create the access point.
 
-So, as a stop-gap solution, I'll keep a (right now completely unmodified) copy of this driver for the time being, until these issues are resolved.
+So, as a stop-gap solution, I'll keep a copy of this driver for the time being, until these issues are resolved.
 
 
 Installation
