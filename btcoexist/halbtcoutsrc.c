@@ -1615,13 +1615,6 @@ void exhalbtc_rf_status_notify(struct btc_coexist *btcoexist, u8 type)
 	}
 }
 
-void exhalbtc_stack_operation_notify(struct btc_coexist *btcoexist, u8 type)
-{
-	if (!halbtc_is_bt_coexist_available(btcoexist))
-		return;
-	btcoexist->statistics.cnt_stack_operation_notify++;
-}
-
 void exhalbtc_halt_notify(struct btc_coexist *btcoexist)
 {
 	if (!halbtc_is_bt_coexist_available(btcoexist))
