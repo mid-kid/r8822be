@@ -1550,6 +1550,7 @@ int rtl_pci_reset_trx_ring(struct ieee80211_hw *hw)
 
 			while (skb_queue_len(&ring->queue)) {
 				u8 *entry;
+                u64 desc;
 				struct sk_buff *skb =
 					__skb_dequeue(&ring->queue);
 				if (rtlpriv->use_new_trx_flow)
@@ -1558,10 +1559,10 @@ int rtl_pci_reset_trx_ring(struct ieee80211_hw *hw)
 				else
 					entry = (u8 *)(&ring->desc[ring->idx]);
 
-				pci_unmap_single(rtlpci->pdev,
-				     rtlpriv->cfg->ops->get_desc(hw, (u8 *)entry,
-					 true, HW_DESC_TXBUFF_ADDR),
-					 skb->len, PCI_DMA_TODEVICE);
+                desc = rtlpriv->cfg->ops->get_desc(hw, (u8 *)entry, true, HW_DESC_TXBUFF_ADDR);
+                if (desc)
+                    pci_unmap_single(rtlpci->pdev, desc,
+                         skb->len, PCI_DMA_TODEVICE);
 				dev_kfree_skb_irq(skb);
 				ring->idx = (ring->idx + 1) % ring->entries;
 			}
