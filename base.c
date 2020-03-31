@@ -1722,7 +1722,8 @@ int rtl_tx_agg_start(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 	*ssn = tid_data->seq_number;
 	tid_data->agg.agg_state = RTL_AGG_START;
 
-	return IEEE80211_AMPDU_TX_START_IMMEDIATE;
+	ieee80211_start_tx_ba_cb_irqsafe(vif, sta->addr, tid);
+	return 0;
 }
 
 int rtl_tx_agg_stop(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
