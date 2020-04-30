@@ -15,6 +15,7 @@
 #include "wifi.h"
 #include "base.h"
 #include "rc.h"
+#include <linux/version.h>
 
 /*
  *Finds the highest rate index we can use
@@ -250,7 +251,13 @@ static void rtl_rate_update(void *ppriv,
 {
 }
 
+#if LINUX_VERSION_CODE <= KERNEL_VERSION(5, 4, 35) || \
+	(LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0) && \
+	LINUX_VERSION_CODE <= KERNEL_VERSION(5, 6, 7))
 static void *rtl_rate_alloc(struct ieee80211_hw *hw, struct dentry *debugfsdir)
+#else
+static void *rtl_rate_alloc(struct ieee80211_hw *hw)
+#endif
 {
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
 	return rtlpriv;
