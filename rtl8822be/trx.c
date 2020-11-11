@@ -23,8 +23,6 @@
 #include "led.h"
 #include "fw.h"
 
-#include <linux/vermagic.h>
-
 static u8 _rtl8822be_map_hwqueue_to_fwqueue(struct sk_buff *skb, u8 hw_queue)
 {
 	switch (hw_queue) {
